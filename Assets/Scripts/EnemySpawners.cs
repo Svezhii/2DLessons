@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class EnemySpawners : MonoBehaviour
 {
-    [SerializeField] private GameObject[] SpawnPoints;
-    [SerializeField] private GameObject template;
+    [SerializeField] private GameObject[] _spawnPoints;
+    [SerializeField] private Rigidbody2D template;
+    [SerializeField] private float _spawnInterval;
 
     private void Start()
     {
@@ -17,26 +18,25 @@ public class EnemySpawners : MonoBehaviour
 
     private IEnumerator SpawnObject()
     {
-        bool isWork = true;
-        var waitForTwoSeconds = new WaitForSeconds(2f);
+        var waitForSeconds = new WaitForSeconds(_spawnInterval);
 
-        while (isWork)
+        while (enabled)
         {
-            GameObject newObject = Instantiate(template, GetSpawnPoint(SpawnPoints).transform);
+            Rigidbody2D newObject = Instantiate(template, GetSpawnPoint(_spawnPoints).transform);
 
             Walk walk = newObject.GetComponent<Walk>();
 
             walk.SetDirection(TakeDirection());
 
-            yield return waitForTwoSeconds;
+            yield return waitForSeconds;
         }
     }
 
     private float TakeDirection()
     {
-        var random = Random.Range(0, 101);
+        var randomDirection = Random.Range(0, 101);
 
-        if (random > 50)
+        if (randomDirection > 50)
         {
             return -1;
         }

@@ -455,11 +455,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95b4d91eb64d12438cced93087edbc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnPoints:
+  _spawnPoints:
   - {fileID: 841122839}
   - {fileID: 1413707099}
   - {fileID: 431510755}
   template: {fileID: 2109183058271289570, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
+  _spawnInterval: 0
 --- !u!1 &802954759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746260675}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
