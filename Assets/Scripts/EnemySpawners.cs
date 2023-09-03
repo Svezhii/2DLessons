@@ -24,7 +24,7 @@ public class EnemySpawners : MonoBehaviour
         {
             Rigidbody2D newObject = Instantiate(template, GetSpawnPoint(_spawnPoints).transform);
 
-            Walk walk = newObject.GetComponent<Walk>();
+            EnemyWalk walk = newObject.GetComponent<EnemyWalk>();
 
             walk.SetDirection(TakeDirection());
 

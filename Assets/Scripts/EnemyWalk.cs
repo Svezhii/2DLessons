@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class Walk : MonoBehaviour
+public class EnemyWalk : MonoBehaviour
 {
-    private float _speed = 2;
+    [SerializeField] private float _speed;
     private float _direction;
 
     private void Update()
