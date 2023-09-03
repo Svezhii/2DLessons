@@ -456,10 +456,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoints:
-  - {fileID: 841122839}
-  - {fileID: 1413707099}
-  - {fileID: 431510755}
-  template: {fileID: 412904422164018781, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
+  - {fileID: 841122840}
+  - {fileID: 1413707100}
+  - {fileID: 431510756}
+  template: {fileID: -1619166716873109972, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
   _spawnInterval: 2
 --- !u!1 &802954759
 GameObject:

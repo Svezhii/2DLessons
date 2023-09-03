@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -7,8 +8,8 @@ using UnityEngine;
 
 public class EnemySpawners : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _spawnPoints;
-    [SerializeField] private Rigidbody2D template;
+    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private EnemyWalk template;
     [SerializeField] private float _spawnInterval;
 
     private void Start()
@@ -22,11 +23,9 @@ public class EnemySpawners : MonoBehaviour
 
         while (enabled)
         {
-            Rigidbody2D newObject = Instantiate(template, GetSpawnPoint(_spawnPoints).transform);
+            EnemyWalk newObject = Instantiate(template, GetSpawnPoint(_spawnPoints));
 
-            EnemyWalk walk = newObject.GetComponent<EnemyWalk>();
-
-            walk.SetDirection(TakeDirection());
+            newObject.SetDirection(TakeDirection());
 
             yield return waitForSeconds;
         }
@@ -46,7 +45,7 @@ public class EnemySpawners : MonoBehaviour
         }
     }
 
-    private GameObject GetSpawnPoint(GameObject[] gameObjects)
+    private Transform GetSpawnPoint(Transform[] gameObjects)
     {
         return gameObjects[Random.Range(0, gameObjects.Length)];
     }
