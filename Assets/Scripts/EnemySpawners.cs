@@ -9,7 +9,8 @@ using UnityEngine;
 public class EnemySpawners : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private EnemyWalk template;
+    [SerializeField] private Transform[] _target;
+    [SerializeField] private EnemyWalk[] template;
     [SerializeField] private float _spawnInterval;
 
     private void Start()
@@ -23,30 +24,18 @@ public class EnemySpawners : MonoBehaviour
 
         while (enabled)
         {
-            EnemyWalk newObject = Instantiate(template, GetSpawnPoint(_spawnPoints));
+            var numberSpawnPoint = GetNumberSpawnPoint(_spawnPoints);
 
-            newObject.SetDirection(TakeDirection());
+            EnemyWalk newObject = Instantiate(template[numberSpawnPoint], _spawnPoints[numberSpawnPoint]);
+
+            newObject.SetTarget(_target[numberSpawnPoint]);
 
             yield return waitForSeconds;
         }
     }
 
-    private float TakeDirection()
+    private int GetNumberSpawnPoint(Transform[] spawnPoints)
     {
-        var randomDirection = Random.Range(0, 101);
-
-        if (randomDirection > 50)
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-
-    private Transform GetSpawnPoint(Transform[] gameObjects)
-    {
-        return gameObjects[Random.Range(0, gameObjects.Length)];
+        return Random.Range(0, spawnPoints.Length);
     }
 }
