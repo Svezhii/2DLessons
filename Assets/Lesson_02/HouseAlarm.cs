@@ -6,33 +6,24 @@ using UnityEngine;
 
 public class HouseAlarm : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    private VolumeController _volumeController;
+    private Coroutine _fadeCorutine;
 
-    private Coroutine _fadingController;
-    private float _minVolume = 0f;
-    private float _maxVolume = 1f;
-    private float _recoveryRate = 0.1f;
-    private bool isEnemyInside = false;
-
-    private void Update()
+    private void Start()
     {
-        if(isEnemyInside)
-        {
-            float volume = Mathf.MoveTowards(_audioSource.volume, _maxVolume, _recoveryRate * Time.deltaTime);
-            _audioSource.volume = volume;
-        }
-        else
-        {
-            float volume = Mathf.MoveTowards(_audioSource.volume, _minVolume, _recoveryRate * Time.deltaTime);
-            _audioSource.volume = volume;
-        }
+        _volumeController = GetComponent<VolumeController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            isEnemyInside = true;
+            if(_fadeCorutine != null)
+            {
+                StopCoroutine(_fadeCorutine);
+            }
+
+            _fadeCorutine = StartCoroutine(_volumeController.FadeUp());
         }
     }
 
@@ -40,7 +31,12 @@ public class HouseAlarm : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            isEnemyInside = false;
+            if (_fadeCorutine != null)
+            {
+                StopCoroutine(_fadeCorutine);
+            }
+
+            _fadeCorutine = StartCoroutine(_volumeController.FadeDown());
         }
     }
 }

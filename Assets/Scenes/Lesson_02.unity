@@ -909,6 +909,7 @@ GameObject:
   - component: {fileID: 1623058855}
   - component: {fileID: 1623058856}
   - component: {fileID: 1623058857}
+  - component: {fileID: 1623058859}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -1019,7 +1020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c44cf9c221ac384c86a10efab5db6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 344888650}
 --- !u!212 &1623058858
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1072,6 +1072,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1623058859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623058853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a94cada226a2f442b5931a67dcb210f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 344888650}
 --- !u!1 &1641309549
 GameObject:
   m_ObjectHideFlags: 0
