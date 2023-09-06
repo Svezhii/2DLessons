@@ -10,22 +10,13 @@ public class VolumeController : MonoBehaviour
     private float _maxVolume = 1f;
     private float _recoveryRate = 0.1f;
 
-    public IEnumerator FadeUp()
+    public IEnumerator FadeController(bool IsEnemyHouse)
     {
-        while(enabled)
-        {
-            float volume = Mathf.MoveTowards(_audioSource.volume, _maxVolume, _recoveryRate * Time.deltaTime);
-            _audioSource.volume = volume;
+        float targetVolume = IsEnemyHouse ? _maxVolume : _minVolume;
 
-            yield return null;
-        }
-    }
-
-    public IEnumerator FadeDown()
-    {
-        while(_audioSource.volume > 0)
+        while ((IsEnemyHouse && _audioSource.volume < _maxVolume) || (IsEnemyHouse == false && _audioSource.volume > _minVolume))
         {
-            float volume = Mathf.MoveTowards(_audioSource.volume, _minVolume, _recoveryRate * Time.deltaTime);
+            float volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _recoveryRate * Time.deltaTime);
             _audioSource.volume = volume;
 
             yield return null;

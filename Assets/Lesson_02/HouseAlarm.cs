@@ -4,10 +4,12 @@ using System.Threading;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
+[RequireComponent(typeof(VolumeController))]
 public class HouseAlarm : MonoBehaviour
 {
     private VolumeController _volumeController;
     private Coroutine _fadeCorutine;
+    private bool IsEnemyInsaid = false;
 
     private void Start()
     {
@@ -18,12 +20,14 @@ public class HouseAlarm : MonoBehaviour
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            if(_fadeCorutine != null)
+            IsEnemyInsaid = true;
+
+            if (_fadeCorutine != null)
             {
                 StopCoroutine(_fadeCorutine);
             }
 
-            _fadeCorutine = StartCoroutine(_volumeController.FadeUp());
+            _fadeCorutine = StartCoroutine(_volumeController.FadeController(IsEnemyInsaid));
         }
     }
 
@@ -31,12 +35,14 @@ public class HouseAlarm : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
+            IsEnemyInsaid = false;
+
             if (_fadeCorutine != null)
             {
                 StopCoroutine(_fadeCorutine);
             }
 
-            _fadeCorutine = StartCoroutine(_volumeController.FadeDown());
+            _fadeCorutine = StartCoroutine(_volumeController.FadeController(IsEnemyInsaid));
         }
     }
 }
