@@ -15,10 +15,18 @@ public class VolumeController : MonoBehaviour
 
     private void Start()
     {
-        _houseAlarm= GetComponent<HouseAlarm>();
+        _houseAlarm = GetComponent<HouseAlarm>();
     }
 
     private void Update()
+    {
+        if(_houseAlarm.IsEnemyEntered || _houseAlarm.IsEnemyExited)
+        {
+            StartFadeCorutine();
+        }
+    }
+
+    private void StartFadeCorutine()
     {
         if (_fadeCorutine != null)
         {
@@ -26,18 +34,23 @@ public class VolumeController : MonoBehaviour
         }
 
         _fadeCorutine = StartCoroutine(FadeController());
-    }
+    }   
 
     public IEnumerator FadeController()
     {
-        float targetVolume = _houseAlarm.IsEnemyInsaid ? _maxVolume : _minVolume;
+        float targetVolume = _houseAlarm.IsEnemyInside ? _maxVolume : _minVolume;
 
-        while ((_houseAlarm.IsEnemyInsaid && _audioSource.volume < _maxVolume) || (_houseAlarm.IsEnemyInsaid == false && _audioSource.volume > _minVolume))
+        while ((_houseAlarm.IsEnemyInside && _audioSource.volume < _maxVolume) ||
+              (_houseAlarm.IsEnemyInside == false && _audioSource.volume > _minVolume))
         {
+            Debug.Log("true");
+
             float volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _recoveryRate * Time.deltaTime);
             _audioSource.volume = volume;
 
             yield return null;
         }
+
+        _houseAlarm.SwitchFlags();
     }
 }

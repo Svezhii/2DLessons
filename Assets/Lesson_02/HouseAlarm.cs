@@ -6,13 +6,17 @@ using UnityEngine;
 
 public class HouseAlarm : MonoBehaviour
 {
-    public bool IsEnemyInsaid { get; private set; } = false;
+    public bool IsEnemyEntered { get; private set; } = false;
+    public bool IsEnemyExited { get; private set; } = false;
+    public bool IsEnemyInside { get; private set; } = false;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            IsEnemyInsaid = true;
+            IsEnemyEntered = true;
+            IsEnemyInside = true;
         }
     }
 
@@ -20,7 +24,14 @@ public class HouseAlarm : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            IsEnemyInsaid = false;
+            IsEnemyExited = true;
+            IsEnemyInside = false;
         }
+    }
+
+    public void SwitchFlags()
+    {
+        IsEnemyEntered = false;
+        IsEnemyExited = false;
     }
 }
