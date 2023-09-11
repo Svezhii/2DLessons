@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class HouseAlarm : MonoBehaviour
 {
-    public bool IsEnemyEntered { get; private set; } = false;
-    public bool IsEnemyExited { get; private set; } = false;
+    private VolumeController _volumeController;
     public bool IsEnemyInside { get; private set; } = false;
 
+    private void Start()
+    {
+        _volumeController = GetComponent<VolumeController>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<Player>(out Player player))
         {
-            IsEnemyEntered = true;
             IsEnemyInside = true;
+
+            _volumeController.StartFadeCorutine();
         }
     }
 
@@ -24,14 +26,9 @@ public class HouseAlarm : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            IsEnemyExited = true;
             IsEnemyInside = false;
-        }
-    }
 
-    public void SwitchFlags()
-    {
-        IsEnemyEntered = false;
-        IsEnemyExited = false;
+            _volumeController.StartFadeCorutine();
+        }
     }
 }
