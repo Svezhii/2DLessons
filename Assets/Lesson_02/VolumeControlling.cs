@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(HouseAlarm))]
-public class VolumeController : MonoBehaviour
+public class VolumeControlling : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
 
@@ -18,7 +18,7 @@ public class VolumeController : MonoBehaviour
         _houseAlarm = GetComponent<HouseAlarm>();
     }
 
-    public void StartFadeCorutine()
+    public void StartVolumeChangingCorutine()
     {
         if (_fadeCorutine != null)
         {

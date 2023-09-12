@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HouseAlarm : MonoBehaviour
 {
-    private VolumeController _volumeController;
+    private VolumeControlling _volumeController;
     public bool IsEnemyInside { get; private set; } = false;
 
     private void Start()
     {
-        _volumeController = GetComponent<VolumeController>();
+        _volumeController = GetComponent<VolumeControlling>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,7 +18,7 @@ public class HouseAlarm : MonoBehaviour
         {
             IsEnemyInside = true;
 
-            _volumeController.StartFadeCorutine();
+            _volumeController.StartVolumeChangingCorutine();
         }
     }
 
@@ -28,7 +28,7 @@ public class HouseAlarm : MonoBehaviour
         {
             IsEnemyInside = false;
 
-            _volumeController.StartFadeCorutine();
+            _volumeController.StartVolumeChangingCorutine();
         }
     }
 }
