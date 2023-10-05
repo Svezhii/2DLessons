@@ -9,9 +9,12 @@ public class WaypointMovement : MonoBehaviour
 
     private Transform[] _points;
     private int _currentPoint;
+    private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         _points = new Transform[_path.childCount];
 
         for (int i = 0; i < _path.childCount; i++)
@@ -34,6 +37,15 @@ public class WaypointMovement : MonoBehaviour
             {
                 _currentPoint = 0;
             }
+        }
+
+        if (transform.position.x < target.position.x)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else
+        {
+            _spriteRenderer.flipX = false;
         }
     }
 }
