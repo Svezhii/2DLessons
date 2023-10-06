@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float _speed;
+
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    [SerializeField] private float _speed;
+
+    const int idle = 0;
+    const int walk = 1;
+    const int run = 2;
 
     private void Start()
     {
@@ -27,12 +33,12 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = false;
 
             transform.Translate(_speed * Time.deltaTime, 0, 0);
-            _animator.SetFloat("Speed", 1);
+            _animator.SetFloat("Speed", walk);
         }
 
         if (Input.GetKeyUp(KeyCode.D))
         {
-            _animator.SetFloat("Speed", 0);
+            _animator.SetFloat("Speed", idle);
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -40,12 +46,12 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = true;
 
             transform.Translate(_speed * Time.deltaTime * -1, 0, 0);
-            _animator.SetFloat("Speed", 1);
+            _animator.SetFloat("Speed", walk);
         }
 
         if (Input.GetKeyUp(KeyCode.A))
         {
-            _animator.SetFloat("Speed", 0);
+            _animator.SetFloat("Speed", idle);
         }
     }
 
@@ -56,12 +62,12 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = false;
 
             transform.Translate(_speed * Time.deltaTime, 0, 0);
-            _animator.SetFloat("Speed", 2);
+            _animator.SetFloat("Speed", run);
         }
 
         if (Input.GetKeyUp(KeyCode.D))
         {
-            _animator.SetFloat("Speed", 0);
+            _animator.SetFloat("Speed", idle);
         }
 
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
@@ -69,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
             _spriteRenderer.flipX = true;
 
             transform.Translate(_speed  * Time.deltaTime * -1, 0, 0);
-            _animator.SetFloat("Speed", 2);
+            _animator.SetFloat("Speed", run);
         }
 
         if (Input.GetKeyUp(KeyCode.A))
         {
-            _animator.SetFloat("Speed", 0);
+            _animator.SetFloat("Speed", idle);
         }
     }
 }

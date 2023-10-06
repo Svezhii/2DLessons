@@ -5,7 +5,7 @@ using UnityEngine;
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private SpriteRenderer _template;
+    [SerializeField] private Coin _template;
     [SerializeField] private float _spawnInterval;
 
     private void Start()

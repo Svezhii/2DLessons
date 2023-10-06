@@ -315,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 320597180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.36, y: 9.95, z: 0}
+  m_LocalPosition: {x: 3.36, y: 9.875588, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -722,7 +722,7 @@ MonoBehaviour:
   - {fileID: 2136367672}
   - {fileID: 425584845}
   - {fileID: 400410082}
-  _template: {fileID: 7451899037391375043, guid: 8e1e21c518b0193429a1aa4786833adb, type: 3}
+  _template: {fileID: -3866352009736335425, guid: 8e1e21c518b0193429a1aa4786833adb, type: 3}
   _spawnInterval: 2
 --- !u!1 &580286062
 GameObject:
@@ -780,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 586476163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.19, y: 9.95, z: 0}
+  m_LocalPosition: {x: -3.19, y: 9.875588, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -814,6 +814,10 @@ PrefabInstance:
       propertyPath: _speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4707208780021051880, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1746260677}
     - target: {fileID: 7185452124371133615, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
       propertyPath: m_Size.y
       value: 1.1720936
@@ -1002,7 +1006,7 @@ Transform:
   m_GameObject: {fileID: 1325735943}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.37, y: -2.051, z: 0}
+  m_LocalPosition: {x: 20.37, y: -2.084711, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1717,9 +1721,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 312741194}
     - target: {fileID: 4707208780021051880, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
-      propertyPath: _speed
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1746260677}
     - target: {fileID: 7185452124371133615, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
       propertyPath: m_Size.y
       value: 1.1721061
@@ -1793,6 +1797,7 @@ GameObject:
   - component: {fileID: 1746260682}
   - component: {fileID: 1746260683}
   - component: {fileID: 1746260684}
+  - component: {fileID: 1746260685}
   m_Layer: 0
   m_Name: MainPlayer
   m_TagString: Untagged
@@ -1951,6 +1956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ff2fa5c80939a4b858e88ffef5d426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 0
 --- !u!114 &1746260682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,6 +2004,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1746260685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746260675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fb92656c61b1342a80a9c2765a4996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1892547048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2054,7 +2072,7 @@ Transform:
   m_GameObject: {fileID: 1941838477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.9, y: -2.051, z: 0}
+  m_LocalPosition: {x: 11.9, y: -2.084711, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2088,6 +2106,10 @@ PrefabInstance:
       propertyPath: _speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4707208780021051880, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1746260677}
     - target: {fileID: 7185452124371133615, guid: 53cbd1c23779f0b408cc904d4585be0a, type: 3}
       propertyPath: m_Size.y
       value: 1.172135
