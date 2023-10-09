@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class WaypointMovement : MonoBehaviour
 {
     [SerializeField] private Transform _path;
@@ -41,13 +42,6 @@ public class WaypointMovement : MonoBehaviour
             }
         }
 
-        if (transform.position.x < target.position.x)
-        {
-            _spriteRenderer.flipX = true;
-        }
-        else
-        {
-            _spriteRenderer.flipX = false;
-        }
+        _spriteRenderer.flipX = transform.position.x < target.position.x;
     }
 }

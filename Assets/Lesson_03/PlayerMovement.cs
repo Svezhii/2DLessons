@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
     private SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+    public float Speed { get; private set; }
 
-    const int idle = 0;
-    const int walk = 1;
-    const int run = 2;
+    const float idle = 0;
+    const float walk = 1;
+    const float run = 2;
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Walk();
         Run();
+        Idle();
     }
 
     private void Walk()
@@ -32,26 +33,16 @@ public class PlayerMovement : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
 
+            Speed = 1;
             transform.Translate(_speed * Time.deltaTime, 0, 0);
-            _animator.SetFloat("Speed", walk);
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            _animator.SetFloat("Speed", idle);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             _spriteRenderer.flipX = true;
 
+            Speed = 1;
             transform.Translate(_speed * Time.deltaTime * -1, 0, 0);
-            _animator.SetFloat("Speed", walk);
-        }
-
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            _animator.SetFloat("Speed", idle);
         }
     }
 
@@ -61,26 +52,30 @@ public class PlayerMovement : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
 
+            Speed = 2;
             transform.Translate(_speed * Time.deltaTime, 0, 0);
-            _animator.SetFloat("Speed", run);
-        }
-
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            _animator.SetFloat("Speed", idle);
         }
 
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
         {
             _spriteRenderer.flipX = true;
 
+            Speed = 2;
             transform.Translate(_speed  * Time.deltaTime * -1, 0, 0);
-            _animator.SetFloat("Speed", run);
+        }
+    }
+
+    private void Idle()
+    {
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            Speed = 0;
         }
 
         if (Input.GetKeyUp(KeyCode.A))
         {
-            _animator.SetFloat("Speed", idle);
+            Speed = 0;
         }
     }
 }
+

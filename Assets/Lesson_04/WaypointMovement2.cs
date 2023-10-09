@@ -8,11 +8,12 @@ public class WaypointMovement2 : MonoBehaviour
 {
     [SerializeField] private Transform _path;
     [SerializeField] private float _speed;
+    [SerializeField] private Transform _player;
+    [SerializeField] private float _radius;
 
     private Transform[] _points;
     private int _currentPoint;
     private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Transform _player;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class WaypointMovement2 : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
 
-        if (distanceToPlayer < GetComponent<CircleCollider2D>().radius)
+        if (distanceToPlayer < _radius)
         {
             transform.position = Vector3.MoveTowards(transform.position, _player.position, (_speed + 2) * Time.deltaTime);
 
