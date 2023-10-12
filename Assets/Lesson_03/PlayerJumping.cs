@@ -25,7 +25,7 @@ public class PlayerJumping : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.otherCollider.TryGetComponent(out Player player))
+        if (collision.collider.CompareTag("Ground"))
         {
             _isGround = true;
         }
@@ -33,10 +33,9 @@ public class PlayerJumping : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.otherCollider.TryGetComponent(out Player player))
+        if (collision.collider.CompareTag("Ground"))
         {
             _isGround = false;
         }
     }
-
 }

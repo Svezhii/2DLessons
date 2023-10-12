@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class WaypointMovement : MonoBehaviour
+public class WaypointMovementOld : MonoBehaviour
 {
     [SerializeField] private Transform _path;
     [SerializeField] private float _speed;

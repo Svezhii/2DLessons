@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.GraphicsBuffer;
 
-public class WaypointMovement2 : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+public class WaypointMovement : MonoBehaviour
 {
     [SerializeField] private Transform _path;
     [SerializeField] private float _speed;
-    [SerializeField] private Transform _player;
     [SerializeField] private float _radius;
 
     private Transform[] _points;
@@ -29,13 +32,20 @@ public class WaypointMovement2 : MonoBehaviour
 
     private void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
+        var hitsLeft = Physics2D.RaycastAll(transform.position, Vector2.left, _radius);
+        var hitsRight = Physics2D.RaycastAll(transform.position, Vector2.right, _radius);
 
-        if (distanceToPlayer < _radius)
+        var hits = new RaycastHit2D[hitsLeft.Length + hitsRight.Length];
+        hitsLeft.CopyTo(hits, 0);
+        hitsRight.CopyTo(hits, hitsLeft.Length);
+
+        var objectsWithComponent = hits.FirstOrDefault(hit => hit.collider.TryGetComponent<Player>(out Player player));
+
+        if (objectsWithComponent)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _player.position, (_speed + 2) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, objectsWithComponent.transform.position, (_speed + 2) * Time.deltaTime);
 
-            FlipCharacter(_player);
+            FlipCharacter(objectsWithComponent.transform);
         }
         else
         {
