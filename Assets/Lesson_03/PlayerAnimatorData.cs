@@ -11,12 +11,14 @@ public class PlayerAnimatorData : MonoBehaviour
     private Animator _animator;
     private PlayerMovement _playerMovement;
     private Player _player;
+    private PlayerAttack _playerAttack;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _playerMovement = GetComponent<PlayerMovement>();
         _player = GetComponent<Player>();
+        _playerAttack = GetComponent<PlayerAttack>();
     }
 
     public class Params
@@ -35,6 +37,11 @@ public class PlayerAnimatorData : MonoBehaviour
             _animator.SetTrigger(Params.Hurt);
 
             _player.SetDamaged();
+        }
+
+        if(_playerAttack.AttackCollider.enabled)
+        {
+            _animator.Play(Params.Attack);
         }
     }
 }

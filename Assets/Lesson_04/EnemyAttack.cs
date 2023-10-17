@@ -15,12 +15,13 @@ public class EnemyAttack : MonoBehaviour
     private bool _canDamage = true;
     private Coroutine _coroutine;
     private int Damage = 1;
+    static public readonly int Attack = Animator.StringToHash(nameof(Attack));
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _attackCollider = GetComponent<Collider2D>();
-        _attackCollider.GetComponent<Collider2D>().enabled = false;
+        _attackCollider.enabled = false;
     }
 
     private void Update()
@@ -36,25 +37,25 @@ public class EnemyAttack : MonoBehaviour
 
         if (objectsWithComponent && _canDamage)
         {
-            _animator.SetTrigger("Attack");
+            _animator.SetTrigger(Attack);
             _coroutine = StartCoroutine(AnimationDelayCoroutine());
             _canDamage = false;
             _coroutine = StartCoroutine(DamageDelayCoroutine());
-            _attackCollider.GetComponent<Collider2D>().enabled = false;
+            _attackCollider.enabled = false;
         }
     }
 
     private IEnumerator AnimationDelayCoroutine()
     {
         yield return new WaitForSeconds(_damageDelayTime + 0.2f);
-        _attackCollider.GetComponent<Collider2D>().enabled = true;
+        _attackCollider.enabled = true;
     }
 
     private IEnumerator DamageDelayCoroutine()
     {
         yield return new WaitForSeconds(_damageDelayTime);
         _canDamage = true;
-        _attackCollider.GetComponent<Collider2D>().enabled = false;
+        _attackCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

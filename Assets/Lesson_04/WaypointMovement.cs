@@ -69,13 +69,6 @@ public class WaypointMovement : MonoBehaviour
 
     private void FlipCharacter(Transform target)
     {
-        if (transform.position.x < target.position.x)
-        {
-            _spriteRenderer.flipX = true;
-        }
-        else
-        {
-            _spriteRenderer.flipX = false;
-        }
+        _spriteRenderer.flipX = transform.position.x < target.position.x;
     }
 }

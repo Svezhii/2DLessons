@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class Player : MonoBehaviour 
 {
-    [SerializeField] public int Health { get; private set; } = 20;
-
+    private Health _health;
     public bool IsDamaged { get; private set; } = false;
+    private int _maxHP = 20;
+
+    private void Start()
+    {
+        _health = GetComponent<Health>();
+    }
 
     private void Die()
     {
@@ -15,13 +21,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-
-        Debug.Log(Health);
+        _health.Count -= damage;
 
         IsDamaged = true;
 
-        if (Health <= 0)
+        if (_health.Count <= 0)
         {
             Die();
         }
@@ -34,6 +38,13 @@ public class Player : MonoBehaviour
 
     public void Healing(int healing)
     {
-        Health += healing;
+        if (_health.Count <= healing)
+        {
+            _health.Count += healing;
+        }
+        else
+        {
+            _health.Count += _maxHP - _health.Count;
+        }
     }
 }
