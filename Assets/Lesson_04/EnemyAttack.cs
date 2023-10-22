@@ -12,9 +12,10 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private float _damageDelayTime;
 
     private Animator _animator;
-    private bool _canDamage = true;
+    private bool _canAttack = true;
     private Coroutine _coroutine;
     private int Damage = 1;
+    private float _animationDelay = 0.2f;
     static public readonly int Attack = Animator.StringToHash(nameof(Attack));
 
     private void Start()
@@ -26,6 +27,22 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
+        var player = FindPlayer();
+
+        Hit(player);
+    }
+
+    private void Hit(RaycastHit2D player)
+    {
+        if (player && _canAttack)
+        {
+            _animator.SetTrigger(Attack);
+            _coroutine = StartCoroutine(DamageDelayCoroutine());
+        }
+    }
+
+    private RaycastHit2D FindPlayer()
+    {
         var hitsLeft = Physics2D.RaycastAll(transform.position, Vector2.left, _radius);
         var hitsRight = Physics2D.RaycastAll(transform.position, Vector2.right, _radius);
 
@@ -33,28 +50,16 @@ public class EnemyAttack : MonoBehaviour
         hitsLeft.CopyTo(hits, 0);
         hitsRight.CopyTo(hits, hitsLeft.Length);
 
-        var objectsWithComponent = hits.FirstOrDefault(hit => hit.collider.TryGetComponent<Player>(out Player player));
-
-        if (objectsWithComponent && _canDamage)
-        {
-            _animator.SetTrigger(Attack);
-            _coroutine = StartCoroutine(AnimationDelayCoroutine());
-            _canDamage = false;
-            _coroutine = StartCoroutine(DamageDelayCoroutine());
-            _attackCollider.enabled = false;
-        }
-    }
-
-    private IEnumerator AnimationDelayCoroutine()
-    {
-        yield return new WaitForSeconds(_damageDelayTime + 0.2f);
-        _attackCollider.enabled = true;
+        return hits.FirstOrDefault(hit => hit.collider.TryGetComponent<Player>(out Player player));
     }
 
     private IEnumerator DamageDelayCoroutine()
     {
+        _canAttack = false;
+        yield return new WaitForSeconds(_animationDelay);
+        _attackCollider.enabled = true;
         yield return new WaitForSeconds(_damageDelayTime);
-        _canDamage = true;
+        _canAttack = true;
         _attackCollider.enabled = false;
     }
 

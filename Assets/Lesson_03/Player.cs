@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public bool IsDamaged { get; private set; } = false;
     private int _maxHP = 20;
 
-    private void Start()
+    private void Awake()
     {
         _health = GetComponent<Health>();
     }
@@ -21,11 +21,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _health.Count -= damage;
+        _health.Value -= damage;
 
         IsDamaged = true;
 
-        if (_health.Count <= 0)
+        if (_health.Value <= 0)
         {
             Die();
         }
@@ -38,13 +38,13 @@ public class Player : MonoBehaviour
 
     public void Healing(int healing)
     {
-        if (_health.Count <= healing)
+        if (_health.Value <= healing)
         {
-            _health.Count += healing;
+            _health.Value += healing;
         }
         else
         {
-            _health.Count += _maxHP - _health.Count;
+            _health.Value += _maxHP - _health.Value;
         }
     }
 }

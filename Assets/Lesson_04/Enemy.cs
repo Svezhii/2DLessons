@@ -10,19 +10,23 @@ public class Enemy : MonoBehaviour
     private Health _health;
     static public readonly int Hurt = Animator.StringToHash(nameof(Hurt));
 
-    private void Start()
+    private void Awake()
     {
         _health = GetComponent<Health>();
+    }
+
+    private void Start()
+    {
         _animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage)
     {
-        _health.Count -= damage;
+        _health.Value -= damage;
 
         _animator.SetTrigger(Hurt);
 
-        if (_health.Count <= 0)
+        if (_health.Value <= 0)
         {
             Die();
         }
