@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class Player : MonoBehaviour 
+public class Player : MonoBehaviour
 {
     private Health _health;
     public bool IsDamaged { get; private set; } = false;
-    private int _maxHP = 20;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
     }
 
+    private void Update()
+    {
+        Die();
+    }
+
     private void Die()
     {
-        Destroy(gameObject);
+        if (_health.Value <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -24,11 +31,6 @@ public class Player : MonoBehaviour
         _health.Value -= damage;
 
         IsDamaged = true;
-
-        if (_health.Value <= 0)
-        {
-            Die();
-        }
     }
 
     public void SetDamaged()
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _health.Value += _maxHP - _health.Value;
+            _health.Value += _health.MaxValue - _health.Value;
         }
     }
 }
