@@ -14,5 +14,4 @@ public class Health : MonoBehaviour
     {
         _maxValue = Value;
     }
-
 }
