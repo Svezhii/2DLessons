@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private HealthManagerUI _healthManagerUI;
+    [SerializeField] private Player _player;
 
     private Slider _slider;
     private int _oneHundredPercent = 100;
@@ -21,12 +21,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthManagerUI.HealthChange += ChangeHealthBar;
+        _player.HealthChange += ChangeHealthBar;
     }
 
     private void OnDisable()
     {
-        _healthManagerUI.HealthChange -= ChangeHealthBar;
+        _player.HealthChange -= ChangeHealthBar;
     }
 
     private void ChangeHealthBar()

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SmoothHealthBar : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private HealthManagerUI _healthManagerUI;
+    [SerializeField] private Player _player;
 
     private Slider _slider;
     private float _smoothSpeed = 5f;
@@ -21,12 +21,12 @@ public class SmoothHealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthManagerUI.HealthChange += ChangeHealthBar;
+        _player.HealthChange += ChangeHealthBar;
     }
 
     private void OnDisable()
     {
-        _healthManagerUI.HealthChange -= ChangeHealthBar;
+        _player.HealthChange -= ChangeHealthBar;
     }
 
     private void ChangeHealthBar()
@@ -38,7 +38,7 @@ public class SmoothHealthBar : MonoBehaviour
 
     private IEnumerator LerpHealthBar(float targetValue)
     {
-        while (Mathf.Abs(_slider.value - targetValue) > 0.1f)
+        while (Mathf.Abs(_slider.value - targetValue) > 0.2f)
         {
             _slider.value = Mathf.Lerp(_slider.value, targetValue, _smoothSpeed * Time.deltaTime);
             yield return null;

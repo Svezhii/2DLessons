@@ -7,7 +7,7 @@ using UnityEngine;
 public class HealthBarText : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private HealthManagerUI _healthManagerUI;
+    [SerializeField] private Player _player;
 
     private TextMeshProUGUI _text;
 
@@ -18,12 +18,12 @@ public class HealthBarText : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthManagerUI.HealthChange += ChangeText;
+        _player.HealthChange += ChangeText;
     }
 
     private void OnDisable()
     {
-        _healthManagerUI.HealthChange -= ChangeText;
+        _player.HealthChange -= ChangeText;
     }
 
     private void ChangeText()

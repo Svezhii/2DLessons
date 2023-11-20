@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Health))]
 public class Player : MonoBehaviour
 {
     private Health _health;
     public bool IsDamaged { get; private set; } = false;
+    public event UnityAction HealthChange;
 
     private void Awake()
     {
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour
         _health.Value -= damage;
 
         IsDamaged = true;
+
+        HealthChange?.Invoke();
     }
 
     public void SetDamaged()
@@ -40,7 +44,7 @@ public class Player : MonoBehaviour
 
     public void Healing(int healing)
     {
-        if (_health.Value <= healing)
+        if (_health.MaxValue - _health.Value >= healing)
         {
             _health.Value += healing;
         }
@@ -48,5 +52,7 @@ public class Player : MonoBehaviour
         {
             _health.Value += _health.MaxValue - _health.Value;
         }
+
+        HealthChange?.Invoke();
     }
 }
