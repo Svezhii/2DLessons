@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SmoothHealthBar : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerOld _player;
 
     private Slider _slider;
     private float _smoothSpeed = 5f;

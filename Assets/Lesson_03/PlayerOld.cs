@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Health))]
-public class Player : MonoBehaviour
+public class PlayerOld : MonoBehaviour
 {
     private Health _health;
     public bool IsDamaged { get; private set; } = false;

@@ -6,10 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class HealthBar : MonoBehaviour
+public class HealthBarOld : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerOld _player;
 
     private Slider _slider;
     private int _oneHundredPercent = 100;

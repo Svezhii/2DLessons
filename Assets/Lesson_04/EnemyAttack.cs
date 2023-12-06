@@ -50,7 +50,7 @@ public class EnemyAttack : MonoBehaviour
         hitsLeft.CopyTo(hits, 0);
         hitsRight.CopyTo(hits, hitsLeft.Length);
 
-        return hits.FirstOrDefault(hit => hit.collider.TryGetComponent<Player>(out Player player));
+        return hits.FirstOrDefault(hit => hit.collider.TryGetComponent<PlayerOld>(out PlayerOld player));
     }
 
     private IEnumerator DamageDelayCoroutine()
@@ -65,7 +65,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_attackCollider.enabled && collision.TryGetComponent<Player>(out Player player))
+        if (_attackCollider.enabled && collision.TryGetComponent<PlayerOld>(out PlayerOld player))
         {
             if (player != null)
             {

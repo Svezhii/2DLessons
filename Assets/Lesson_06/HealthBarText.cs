@@ -7,7 +7,7 @@ using UnityEngine;
 public class HealthBarText : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerOld _player;
 
     private TextMeshProUGUI _text;
 

@@ -39,7 +39,7 @@ public class WaypointMovement : MonoBehaviour
         hitsLeft.CopyTo(hits, 0);
         hitsRight.CopyTo(hits, hitsLeft.Length);
 
-        var objectsWithComponent = hits.FirstOrDefault(hit => hit.collider.TryGetComponent<Player>(out Player player));
+        var objectsWithComponent = hits.FirstOrDefault(hit => hit.collider.TryGetComponent<PlayerOld>(out PlayerOld player));
 
         if (objectsWithComponent)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Health))]
-public class Enemy : MonoBehaviour
+public class EnemyOld : MonoBehaviour
 {
     private Animator _animator;
     private Health _health;
