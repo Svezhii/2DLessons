@@ -9,7 +9,7 @@ public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private Button _restart;
     [SerializeField] private Button _exit;
-    [SerializeField] private Player _player;
+    [SerializeField] private Playerold _player;
 
     private CanvasGroup _gameOverGroup;
 

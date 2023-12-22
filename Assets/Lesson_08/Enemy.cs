@@ -3,37 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Health))]
-public class EnemyOld : MonoBehaviour
+public class Enemy : Character
 {
     private Animator _animator;
-    private Health _health;
     static public readonly int Hurt = Animator.StringToHash(nameof(Hurt));
-
-    private void Awake()
-    {
-        _health = GetComponent<Health>();
-    }
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
-        _health.Value -= damage;
+        Health.Value -= damage;
 
         _animator.SetTrigger(Hurt);
 
-        if (_health.Value <= 0)
+        Call();
+
+        if (Health.Value <= 0)
         {
             Die();
         }
-    }
-
-    private void Die()
-    {
-        Destroy(gameObject);
     }
 }

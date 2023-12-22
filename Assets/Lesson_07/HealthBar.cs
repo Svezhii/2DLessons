@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private Playerold _player;
     [SerializeField] private Heart _heartPrefab;
 
     private List<Heart> _hearts = new List<Heart>();

@@ -7,23 +7,24 @@ using UnityEngine;
 public class HealthBarText : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private PlayerOld _player;
+    [SerializeField] private Character _character;
 
     private TextMeshProUGUI _text;
 
     private void Start()
     {
         _text = GetComponent<TextMeshProUGUI>();
+        _text.text = ($"{_health.Value}/{_health.Value}");
     }
 
     private void OnEnable()
     {
-        _player.HealthChange += ChangeText;
+        _character.HealthChange += ChangeText;
     }
 
     private void OnDisable()
     {
-        _player.HealthChange -= ChangeText;
+        _character.HealthChange -= ChangeText;
     }
 
     private void ChangeText()

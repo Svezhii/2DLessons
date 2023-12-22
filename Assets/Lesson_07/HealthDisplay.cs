@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthDisplay : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private Playerold _player;
     [SerializeField] private TMP_Text _healthDisplay;
 
     private void OnEnable()

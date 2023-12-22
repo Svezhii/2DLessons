@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(AttackCollider.enabled && collision.TryGetComponent<EnemyOld>(out EnemyOld enemy))
+        if(AttackCollider.enabled && collision.TryGetComponent<Enemy>(out Enemy enemy))
         {
             if(enemy != null)
             {

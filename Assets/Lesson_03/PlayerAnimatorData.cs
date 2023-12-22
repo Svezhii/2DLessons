@@ -5,19 +5,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerOld))]
+[RequireComponent(typeof(Player))]
 public class PlayerAnimatorData : MonoBehaviour
 {
     private Animator _animator;
     private PlayerMovement _playerMovement;
-    private PlayerOld _player;
+    private Player _player;
     private PlayerAttack _playerAttack;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _playerMovement = GetComponent<PlayerMovement>();
-        _player = GetComponent<PlayerOld>();
+        _player = GetComponent<Player>();
         _playerAttack = GetComponent<PlayerAttack>();
     }
 

@@ -14,7 +14,7 @@ public class HouseAlarm : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<PlayerOld>(out PlayerOld player))
+        if(collision.TryGetComponent<Player>(out Player player))
         {
             IsEnemyInside = true;
 
@@ -24,7 +24,7 @@ public class HouseAlarm : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<PlayerOld>(out PlayerOld player))
+        if (collision.TryGetComponent<Player>(out Player player))
         {
             IsEnemyInside = false;
 

@@ -8,7 +8,7 @@ public class Medicine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player))
+        if (collision.TryGetComponent(out Playerold player))
         {
             player.ApplyHealth(_health);
         }

@@ -8,10 +8,11 @@ using UnityEngine.UI;
 public class SmoothHealthBar : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private PlayerOld _player;
+    [SerializeField] private Character _character;
 
+    private Coroutine _corutine;
     private Slider _slider;
-    private float _smoothSpeed = 5f;
+    private float _smoothSpeed = 10f;
     private int _oneHundredPercent = 100;
 
     private void Start()
@@ -21,19 +22,24 @@ public class SmoothHealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.HealthChange += ChangeHealthBar;
+        _character.HealthChange += ChangeHealthBar;
     }
 
     private void OnDisable()
     {
-        _player.HealthChange -= ChangeHealthBar;
+        _character.HealthChange -= ChangeHealthBar;
     }
 
     private void ChangeHealthBar()
     {
         float targetValue = ((float)_health.Value / _health.MaxValue) * _oneHundredPercent;
 
-        StartCoroutine(LerpHealthBar(targetValue));
+        if(_corutine != null)
+        {
+            StopCoroutine(_corutine);
+        }
+
+        _corutine = StartCoroutine(LerpHealthBar(targetValue));
     }
 
     private IEnumerator LerpHealthBar(float targetValue)
