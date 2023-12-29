@@ -9,14 +9,23 @@ public class HealthDrainAbility : MonoBehaviour
     [SerializeField]private Button _abilityButton;
     [SerializeField]private Player _player;
 
-    private float _abilityDuration = 6;
+    private float _abilityDuration = 1;
     private bool _isAbilityActive = false;
     private Enemy _enemy;
 
     private void Start()
     {
         _abilityButton.interactable = false;
+    }
+
+    private void OnEnable()
+    {
         _abilityButton.onClick.AddListener(ButtonClick);
+    }
+
+    private void OnDisable()
+    {
+        _abilityButton.onClick.RemoveListener(ButtonClick);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
